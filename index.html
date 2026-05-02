@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لكِ..</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --periwinkle: #D0D6E6;
+            --blush: #F2D3D3;
+            --rose: #EDB0B1;
+            --pastel-red: #E67E7F;
+            --cocoa: #915E56;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: linear-gradient(135deg, var(--blush) 0%, var(--periwinkle) 100%);
+            background-attachment: fixed;
+            color: var(--cocoa);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Floating Orbs Background */
+        .bg-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: -1;
+            opacity: 0.6;
+            animation: floatOrb 20s infinite alternate ease-in-out;
+        }
+        .orb-1 { width: 400px; height: 400px; top: -100px; right: -100px; background: var(--rose); }
+        .orb-2 { width: 500px; height: 500px; bottom: -150px; left: -100px; background: var(--periwinkle); animation-delay: -5s; }
+        .orb-3 { width: 300px; height: 300px; top: 40%; left: 30%; background: var(--blush); animation-duration: 25s; }
+
+        @keyframes floatOrb {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(30px, 50px) scale(1.1); }
+        }
+
+        /* Glassmorphism Class */
+        .glass {
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 10px 40px 0 rgba(145, 94, 86, 0.1);
+            border-radius: 30px;
+        }
+
+        /* Top Card */
+        .top-card {
+            position: fixed;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 20px 40px;
+            text-align: center;
+            z-index: 100;
+            animation: gentleFloat 4s infinite ease-in-out;
+            transition: transform 0.3s ease;
+            min-width: 250px;
+        }
+
+        @keyframes gentleFloat {
+            0%, 100% { transform: translate(-50%, 0); }
+            50% { transform: translate(-50%, -8px); }
+        }
+
+        .days-number {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--pastel-red);
+            text-shadow: 0 2px 10px rgba(230, 126, 127, 0.3);
+            line-height: 1.4;
+            direction: rtl;
+        }
+
+        .days-text {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-top: 5px;
+            opacity: 0.9;
+            color: var(--cocoa);
+        }
+
+        /* Main Grid -> Masonry */
+        .grid-container {
+            max-width: 1000px;
+            margin: 160px auto 120px;
+            padding: 0 20px;
+            column-count: 3;
+            column-gap: 30px;
+        }
+
+        .grid-card {
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+            opacity: 0;
+            transform: translateY(30px);
+            break-inside: avoid;
+            margin-bottom: 30px;
+        }
+
+        .grid-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .card-img-wrapper {
+            width: 100%;
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .card-img-wrapper img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+            transition: transform 0.6s ease, filter 0.6s ease;
+            filter: grayscale(20%) opacity(0.85);
+        }
+
+        .grid-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 15px 45px 0 rgba(145, 94, 86, 0.15);
+        }
+
+        .grid-card:hover .card-img-wrapper img {
+            transform: scale(1.08);
+            filter: grayscale(0%) opacity(1);
+        }
+
+        .card-text {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--cocoa);
+            transition: color 0.4s ease;
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+
+        .grid-card:hover .card-text {
+            color: var(--pastel-red);
+        }
+
+        /* Bottom Button */
+        .bottom-btn {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 15px 50px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            font-family: inherit;
+            color: var(--cocoa);
+            cursor: pointer;
+            border: none;
+            z-index: 100;
+            transition: all 0.3s ease;
+        }
+
+        .bottom-btn::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            border-radius: 30px;
+            border: 2px solid transparent;
+            background: linear-gradient(135deg, var(--pastel-red), var(--rose)) border-box;
+            -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .bottom-btn:hover {
+            color: var(--pastel-red);
+            transform: translateX(-50%) translateY(-3px);
+            box-shadow: 0 10px 25px rgba(230, 126, 127, 0.3);
+        }
+
+        .bottom-btn:hover::before {
+            opacity: 1;
+        }
+
+        .pulse {
+            animation: pulseAnim 2.5s infinite;
+        }
+
+        @keyframes pulseAnim {
+            0% { box-shadow: 0 0 0 0 rgba(230, 126, 127, 0.4); }
+            70% { box-shadow: 0 0 0 15px rgba(230, 126, 127, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(230, 126, 127, 0); }
+        }
+
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(208, 214, 230, 0.4);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
+            padding: 20px;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .modal-content {
+            max-width: 500px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 40px;
+            text-align: right;
+            transform: scale(0.9);
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--cocoa);
+            margin-bottom: 30px;
+            white-space: pre-line;
+        }
+
+        .close-btn {
+            display: block;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.3);
+            border: none;
+            color: var(--pastel-red);
+            font-size: 1rem;
+            font-weight: 700;
+            font-family: inherit;
+            cursor: pointer;
+            transition: color 0.3s, background 0.3s;
+            padding: 10px 30px;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .close-btn:hover {
+            background: rgba(255, 255, 255, 0.5);
+            color: var(--cocoa);
+        }
+
+        /* Gateway Overlay */
+        .gateway-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: linear-gradient(135deg, var(--blush) 0%, var(--periwinkle) 100%);
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.8s ease, visibility 0.8s;
+        }
+        .gateway-overlay.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+        .gateway-card {
+            text-align: center;
+            padding: 30px;
+            max-width: 400px;
+            width: 90%;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        .gateway-card img {
+            max-width: 100%;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            max-height: 250px;
+            object-fit: contain;
+        }
+        .gateway-card p {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--cocoa);
+        }
+        .gateway-btn {
+            background: linear-gradient(135deg, var(--pastel-red), var(--rose));
+            color: white;
+            border: none;
+            padding: 10px 30px;
+            border-radius: 20px;
+            font-size: 1.1rem;
+            font-family: inherit;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(230, 126, 127, 0.4);
+            transition: transform 0.2s;
+        }
+        .gateway-btn:hover {
+            transform: translateY(-2px);
+        }
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            align-items: flex-start;
+        }
+        .btn-group > div {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .small-warning {
+            font-size: 0.75rem;
+            color: var(--pastel-red);
+            margin-top: 5px;
+            font-weight: 700;
+        }
+        .glitter-text {
+            color: var(--cocoa);
+            font-size: 1.5rem;
+            font-weight: 800;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px var(--pastel-red);
+            animation: glitter 1.5s infinite alternate;
+            margin-bottom: 10px;
+        }
+        .small-text {
+            font-size: 0.9rem !important;
+            opacity: 0.9;
+        }
+        @keyframes glitter {
+            0% { opacity: 0.8; text-shadow: 0 0 5px rgba(255, 255, 255, 0.5); transform: scale(0.98); }
+            100% { opacity: 1; text-shadow: 0 0 15px rgba(255, 255, 255, 1), 0 0 25px var(--pastel-red); transform: scale(1.02); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        body.gateway-active {
+            overflow: hidden;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .grid-container {
+                column-count: 2;
+            }
+        }
+        @media (max-width: 600px) {
+            .grid-container {
+                column-count: 1;
+                margin-top: 140px;
+            }
+            .top-card {
+                padding: 15px 30px;
+            }
+            .days-number {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body class="gateway-active">
+
+    <!-- Gateway Overlay -->
+    <div id="gateway-overlay" class="gateway-overlay">
+        <!-- Card 1 -->
+        <div class="gateway-card glass" id="gate-step-1">
+            <img src="Img/1777694767354.png" alt="Step 1">
+            <p>تؤتؤتؤتؤ مش هينفع تدخلي إلا لما تجاوبي على سؤال</p>
+            <button class="gateway-btn" onclick="nextStep(2)">اسألني</button>
+        </div>
+        
+        <!-- Card 2 -->
+        <div class="gateway-card glass" id="gate-step-2" style="display:none;">
+            <img src="Img/1777694804328.png" alt="Step 2">
+            <p>بتحبيني ؟</p>
+            <div class="btn-group">
+                <button class="gateway-btn" onclick="nextStep(4)">نعم</button>
+                <div>
+                   <button class="gateway-btn" onclick="nextStep(3)">لا</button>
+                   <span class="small-warning">يا ويلك</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Card 3 -->
+        <div class="gateway-card glass" id="gate-step-3" style="display:none;">
+            <img src="Img/1777694860415.png" alt="Step 3">
+            <p>ههشش ارجعي قولي انك بتحبيني .. ناس اخر الزمن</p>
+            <button class="gateway-btn" onclick="nextStep(2)">عودة</button>
+        </div>
+        
+        <!-- Card 4 -->
+        <div class="gateway-card glass" id="gate-step-4" style="display:none;">
+            <img src="Img/1777694929931.png" alt="Step 4">
+            <p>كنت متأكد هيهيهيه ، احم احمم وانا كمان بحبك</p>
+            <button class="gateway-btn" onclick="nextStep(5)">التالي</button>
+        </div>
+
+        <!-- Card 5 -->
+        <div class="gateway-card glass" id="gate-step-5" style="display:none;">
+            <img src="Img/1777695049387.png" alt="Step 5">
+            <div class="glitter-text">من أجل الانتصارات التي لا يراها أحد</div>
+            <p class="small-text">هيهيهيه بس انا مش أي حد</p>
+            <button class="gateway-btn" onclick="finishGateway()">التالي</button>
+        </div>
+    </div>
+
+    <!-- Floating Background Orbs -->
+    <div class="bg-orb orb-1"></div>
+    <div class="bg-orb orb-2"></div>
+    <div class="bg-orb orb-3"></div>
+
+    <!-- Top Card -->
+    <div class="top-card glass parallax-element">
+        <div class="days-number" id="days-count">0</div>
+        <div class="days-text" id="dynamic-text">يوماً من نبضات القلب</div>
+    </div>
+
+    <!-- Main Content Grid -->
+    <main class="grid-container" id="gallery">
+        <!-- Cards will be populated here -->
+    </main>
+
+    <!-- Bottom Button -->
+    <button id="modal-open" class="bottom-btn glass pulse parallax-element">رسالة</button>
+
+    <!-- Modal -->
+    <div id="message-modal" class="modal-overlay">
+        <div class="modal-content glass">
+            <div class="modal-text">
+الى بسكوتة قلبي ♡
+
+* اولا ودايما وكالعادة وللأبد بحبكككك اووييي بجدددد ، بكتب لك الرسالة دي وربنا يعلم انا فخور بيكي قد ايه ، عايز اقوم احضنك جامدد
+* ثانيا .. خلينا نفصل راسك الثانيتين دول ونتكلم بجدية ، بغض النظر عن انك شايفة انك متأخرة .. في حد بيعمل كدا ؟ ، تتخلي عن راحتك والحاجات اللي بتحبيها عشان هدفك ، كان ممكن تقضي اليوم كله على تيك ، كان ممكن تقضي اليوم كله بتتفرجي على مسلسل او انمي ، كان ممكن تنامي طول اليوم ، لكن لا ، بتذاكري وبتسهري كمان عشان تحققي هدفك ، وبتقعدي ساعات في مواد بتكرهيها وعلى الرغم من انها متعبة انتي بتكملي ، نفسي الناس كلهم يكونوا زيك بس هنعمل ايه .. انا اخذت النسخة ال Premium ، يا حظي بجد ...
+* ثالثا .. ممكن محدش شايف حجم مجهودك قد ما انتي بتشوفيه لكن انا حاسس بيه مش بس شايفه ، مش بس لاني بفهمك وان بيننا كيمياء عالية (بس المشكلة في الجغرافيا /: ) .. لكن انا كنت في 3 ثانوي برضو ف عارف ، واللي يخليكي اقوى مني اني كنت بعاني مع 7 مواد .. انتي بتحاربي 11 ، انتي بتتعبي وربنا شايفك وكمان شايف انتي بتكبري في نظري قد ايه ، ما شاء الله عليكي بجد قوية اوي واتمنى عيالنا يكونوا زيك بجد ، لكن في كل الاحوال انتي بنتي الجميلة الصغننة الحلوة قبلهم ، نفسي تشوفي نفسك بعيني ، حرفيا قلبي ماشي على الارض ...
+
+بحبك اوي يا لجين وبجد والله كلمة فخور بيكي قليلة في حقك ، لكن لحد ما الاقي كلمة اعمق ... انا فخور بيكي ♡
+
+بابا بيحبك يا بنوتة بابا ♡
+            </div>
+            <button id="modal-close" class="close-btn">إغلاق</button>
+        </div>
+    </div>
+
+    <script>
+        // Gateway Logic
+        function nextStep(step) {
+            document.querySelectorAll('.gateway-card').forEach(card => card.style.display = 'none');
+            document.getElementById('gate-step-' + step).style.display = 'block';
+        }
+
+        function finishGateway() {
+            document.getElementById('gateway-overlay').classList.add('hidden');
+            document.body.classList.remove('gateway-active');
+        }
+
+        // Gallery Data Generation
+        const phrases = [
+            "♡♡♡",
+            "كل يوم بتقربي من حلمك اكثر",
+            "يوم بعد يوم بتأكدي لي اني اخترت صح",
+            "حتى تعبك جميل لانه منك",
+            "شفتي مريتي بايه وكنتي اقوى منه",
+            "النهاردة تتعبي وبكرة تلعبي",
+            "قطة ثغننة ومجتهدة",
+            "فخور بيكي اوي",
+            "انتي غير اي حد .. مين قدك ؟",
+            "بكرة تفتكري الايام دي وتشكري نفسك انك ما استسلمتي",
+            "صاحب الهمة لا يقف حتى يتم المهمة",
+            "يبقى الطريق هو الطريق ... وتتفاوت الأقدام في الإقدام",
+            "إنا لا نضيع أجر من أحسن عملاً .. ♡",
+            "ماما مجتهدة",
+            "مجرد ايام وهتعدي .. كل مُر سيمر",
+            "عااشش عليكي يا بنوتة بابا",
+            "انتي فخري واعتزازي",
+            "شطورة اوي بجد",
+            "بحبك",
+            "لو حد غير لجين كان استسلم",
+            "اتمنى اولادنا يكونوا زيك",
+            "انتي كافية وزيادة وقدها واعلى منها",
+            "ما شاء الله عليكي بجد .. اخترت صح",
+            "مكانك السماء وسط النجوم",
+            "بحبك",
+            "فخور بيكي اوي"
+        ];
+
+        const images = [
+            "Img/IMG-20260501-WA0113.jpg",
+            "Img/IMG-20251207-WA0113.jpg",
+            "Img/IMG-20251207-WA0124.jpg",
+            "Img/IMG-20251213-WA0042.jpg",
+            "Img/IMG-20251219-WA0001.jpg",
+            "Img/IMG-20251220-WA0022.jpg",
+            "Img/IMG-20251224-WA0028.jpg",
+            "Img/IMG-20251228-WA0000.jpg",
+            "Img/IMG-20251228-WA0001.jpg",
+            "Img/IMG-20251228-WA0033.jpg",
+            "Img/IMG-20260117-WA0054.jpg",
+            "Img/IMG-20260214-WA0114(1).jpg",
+            "Img/IMG-20260214-WA0115.jpg",
+            "Img/IMG-20260314-WA0085.jpg",
+            "Img/IMG-20260406-WA0002.jpg",
+            "Img/IMG-20260407-WA0083-1.jpg",
+            "Img/IMG-20260407-WA0083.jpg",
+            "Img/IMG-20260408-WA0018.jpg",
+            "Img/IMG-20260412-WA0062.jpg",
+            "Img/IMG-20260413-WA0012.jpg",
+            "Img/IMG-20260415-WA0057.jpg",
+            "Img/IMG-20260427-WA0102.jpg",
+            "Img/IMG-20260429-WA0046.jpg",
+            "Img/IMG-20260430-WA0186.jpg",
+            "Img/IMG-20260430-WA0259.jpg",
+            "Img/IMG-20260501-WA0003.jpg"
+        ];
+
+        const gallery = document.getElementById('gallery');
+        let galleryHTML = '';
+        images.forEach((imgSrc, index) => {
+            galleryHTML += `
+                <div class="grid-card glass reveal parallax-element">
+                    <div class="card-img-wrapper">
+                        <img src="${imgSrc}" alt="Memory ${index + 1}" loading="lazy">
+                    </div>
+                    <div class="card-text">${phrases[index]}</div>
+                </div>
+            `;
+        });
+        gallery.innerHTML = galleryHTML;
+
+        // Calculate Time Since Dec 12, 2025
+        const updateTimer = () => {
+            const targetDate = new Date('2025-12-12T00:00:00');
+            const now = new Date();
+            let diffTime = now - targetDate;
+            
+            if (diffTime < 0) diffTime = 0;
+
+            const days = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diffTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diffTime % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diffTime % (1000 * 60)) / 1000);
+
+            const counter = document.getElementById('days-count');
+            counter.innerText = `${days} يوم و ${hours} ساعة و ${minutes} دقيقة و ${seconds} ثانية`;
+            
+            const dynamicText = document.getElementById('dynamic-text');
+            dynamicText.innerText = "وللأبد ... ♡";
+        };
+
+        updateTimer();
+        setInterval(updateTimer, 1000);
+
+        // 2. Intersectional Observer for Scroll Flow Animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // 3. Subtle Parallax Effect on Mouse Move
+        document.addEventListener('mousemove', (e) => {
+            const elements = document.querySelectorAll('.parallax-element');
+            const xAxis = (window.innerWidth / 2 - e.pageX) / 60;
+            const yAxis = (window.innerHeight / 2 - e.pageY) / 60;
+
+            elements.forEach(el => {
+                if(window.innerWidth > 768) {
+                    if (el.classList.contains('top-card') || el.classList.contains('bottom-btn')) {
+                        el.style.transform = `translateX(calc(-50% + ${xAxis * 0.5}px)) translateY(${yAxis * 0.5}px)`;
+                    } else {
+                        el.style.transform = `translate(${xAxis}px, ${yAxis}px)`;
+                    }
+                }
+            });
+        });
+
+        // Reset parallax
+        document.addEventListener('mouseleave', () => {
+            const elements = document.querySelectorAll('.parallax-element');
+            elements.forEach(el => {
+                if (el.classList.contains('top-card') || el.classList.contains('bottom-btn')) {
+                    el.style.transform = `translateX(-50%)`;
+                } else {
+                    el.style.transform = `translate(0, 0)`;
+                }
+            });
+        });
+
+        // 4. Modal Interactions
+        const modal = document.getElementById('message-modal');
+        const btnOpen = document.getElementById('modal-open');
+        const btnClose = document.getElementById('modal-close');
+
+        btnOpen.addEventListener('click', () => {
+            modal.classList.add('active');
+        });
+
+        btnClose.addEventListener('click', () => {
+            modal.classList.remove('active');
+        });
+
+        modal.addEventListener('click', (e) => {
+            if(e.target === modal) {
+                modal.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>
