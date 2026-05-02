@@ -110,8 +110,6 @@
             align-items: center;
             text-align: center;
             transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
-            opacity: 0;
-            transform: translateY(30px);
             break-inside: avoid;
             margin-bottom: 30px;
         }
@@ -398,14 +396,14 @@
     <div id="gateway-overlay" class="gateway-overlay">
         <!-- Card 1 -->
         <div class="gateway-card glass" id="gate-step-1">
-            <img src="Img/1777694767354.png" alt="Step 1">
+            <img src="1777694767354.png" alt="Step 1">
             <p>تؤتؤتؤتؤ مش هينفع تدخلي إلا لما تجاوبي على سؤال</p>
             <button class="gateway-btn" onclick="nextStep(2)">اسألني</button>
         </div>
         
         <!-- Card 2 -->
         <div class="gateway-card glass" id="gate-step-2" style="display:none;">
-            <img src="Img/1777694804328.png" alt="Step 2">
+            <img src="1777694804328.png" alt="Step 2">
             <p>بتحبيني ؟</p>
             <div class="btn-group">
                 <button class="gateway-btn" onclick="nextStep(4)">نعم</button>
@@ -418,21 +416,21 @@
         
         <!-- Card 3 -->
         <div class="gateway-card glass" id="gate-step-3" style="display:none;">
-            <img src="Img/1777694860415.png" alt="Step 3">
+            <img src="1777694860415.png" alt="Step 3">
             <p>ههشش ارجعي قولي انك بتحبيني .. ناس اخر الزمن</p>
             <button class="gateway-btn" onclick="nextStep(2)">عودة</button>
         </div>
         
         <!-- Card 4 -->
         <div class="gateway-card glass" id="gate-step-4" style="display:none;">
-            <img src="Img/1777694929931.png" alt="Step 4">
+            <img src="1777694929931.png" alt="Step 4">
             <p>كنت متأكد هيهيهيه ، احم احمم وانا كمان بحبك</p>
             <button class="gateway-btn" onclick="nextStep(5)">التالي</button>
         </div>
 
         <!-- Card 5 -->
         <div class="gateway-card glass" id="gate-step-5" style="display:none;">
-            <img src="Img/1777695049387.png" alt="Step 5">
+            <img src="1777695049387.png" alt="Step 5">
             <div class="glitter-text">من أجل الانتصارات التي لا يراها أحد</div>
             <p class="small-text">هيهيهيه بس انا مش أي حد</p>
             <button class="gateway-btn" onclick="finishGateway()">التالي</button>
@@ -519,32 +517,32 @@
         ];
 
         const images = [
-            "Img/IMG-20260501-WA0113.jpg",
-            "Img/IMG-20251207-WA0113.jpg",
-            "Img/IMG-20251207-WA0124.jpg",
-            "Img/IMG-20251213-WA0042.jpg",
-            "Img/IMG-20251219-WA0001.jpg",
-            "Img/IMG-20251220-WA0022.jpg",
-            "Img/IMG-20251224-WA0028.jpg",
-            "Img/IMG-20251228-WA0000.jpg",
-            "Img/IMG-20251228-WA0001.jpg",
-            "Img/IMG-20251228-WA0033.jpg",
-            "Img/IMG-20260117-WA0054.jpg",
-            "Img/IMG-20260214-WA0114(1).jpg",
-            "Img/IMG-20260214-WA0115.jpg",
-            "Img/IMG-20260314-WA0085.jpg",
-            "Img/IMG-20260406-WA0002.jpg",
-            "Img/IMG-20260407-WA0083-1.jpg",
-            "Img/IMG-20260407-WA0083.jpg",
-            "Img/IMG-20260408-WA0018.jpg",
-            "Img/IMG-20260412-WA0062.jpg",
-            "Img/IMG-20260413-WA0012.jpg",
-            "Img/IMG-20260415-WA0057.jpg",
-            "Img/IMG-20260427-WA0102.jpg",
-            "Img/IMG-20260429-WA0046.jpg",
-            "Img/IMG-20260430-WA0186.jpg",
-            "Img/IMG-20260430-WA0259.jpg",
-            "Img/IMG-20260501-WA0003.jpg"
+            "IMG-20260501-WA0113.jpg",
+            "IMG-20251207-WA0113.jpg",
+            "IMG-20251207-WA0124.jpg",
+            "IMG-20251213-WA0042.jpg",
+            "IMG-20251219-WA0001.jpg",
+            "IMG-20251220-WA0022.jpg",
+            "IMG-20251224-WA0028.jpg",
+            "IMG-20251228-WA0000.jpg",
+            "IMG-20251228-WA0001.jpg",
+            "IMG-20251228-WA0033.jpg",
+            "IMG-20260117-WA0054.jpg",
+            "IMG-20260214-WA0114(1).jpg",
+            "IMG-20260214-WA0115.jpg",
+            "IMG-20260314-WA0085.jpg",
+            "IMG-20260406-WA0002.jpg",
+            "IMG-20260407-WA0083-1.jpg",
+            "IMG-20260407-WA0083.jpg",
+            "IMG-20260408-WA0018.jpg",
+            "IMG-20260412-WA0062.jpg",
+            "IMG-20260413-WA0012.jpg",
+            "IMG-20260415-WA0057.jpg",
+            "IMG-20260427-WA0102.jpg",
+            "IMG-20260429-WA0046.jpg",
+            "IMG-20260430-WA0186.jpg",
+            "IMG-20260430-WA0259.jpg",
+            "IMG-20260501-WA0003.jpg"
         ];
 
         const gallery = document.getElementById('gallery');
@@ -553,7 +551,7 @@
             galleryHTML += `
                 <div class="grid-card glass reveal parallax-element">
                     <div class="card-img-wrapper">
-                        <img src="${imgSrc}" alt="Memory ${index + 1}" loading="lazy">
+                        <img src="${imgSrc}" alt="Memory ${index + 1}">
                     </div>
                     <div class="card-text">${phrases[index]}</div>
                 </div>
@@ -583,23 +581,6 @@
 
         updateTimer();
         setInterval(updateTimer, 1000);
-
-        // 2. Intersectional Observer for Scroll Flow Animation
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: "0px 0px -50px 0px"
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
         // 3. Subtle Parallax Effect on Mouse Move
         document.addEventListener('mousemove', (e) => {
